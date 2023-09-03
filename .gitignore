@@ -1,1 +1,4 @@
+.vscode/
+.trunk/
+.idea/
 .DS_Store

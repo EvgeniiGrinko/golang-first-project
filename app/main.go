@@ -2,14 +2,15 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 )
 
-func main() {
-	t := mustToken()
+const (
+	tgBotHost = "api.telegram.org"
+)
 
-	fmt.Sprintln(t)
+func main() {
+	// tgClient := telagam.New(tgBotHost, mustToken())
 }
 
 func mustToken () string {
