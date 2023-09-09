@@ -1,4 +1,4 @@
-package telagam
+package telegram
 
 import (
 	"encoding/json"
@@ -16,27 +16,27 @@ type Client struct {
 	client   http.Client
 }
 
-const(
-	getUpdatesMethod = "getUpdates"
+const (
+	getUpdatesMethod  = "getUpdates"
 	sendMessageMethod = "sendMessage"
 )
 
 func New(host string, token string) Client {
 
-	return Client {
+	return Client{
 		host:     host,
 		basePath: newBasePath(token),
 		client:   http.Client{},
 	}
 }
-func newBasePath (token string) string {
+func newBasePath(token string) string {
 
 	return "bot" + token
 }
 
 func (c *Client) Updates(offset int, limit int) (updates []Update, err error) {
 
-	defer func () { err = e.Wrap("Couldn't make request", err) } ()
+	defer func() { err = e.Wrap("Couldn't make request", err) }()
 
 	q := url.Values{}
 	q.Add("offset", strconv.Itoa(offset))
@@ -50,13 +50,12 @@ func (c *Client) Updates(offset int, limit int) (updates []Update, err error) {
 	}
 
 	var res UpdatesResponse
-	if err:= json.Unmarshal(data, &res); err!=nil {
+	if err := json.Unmarshal(data, &res); err != nil {
 		return nil, err
 	}
 
 	return res.Result, nil
 }
-
 
 func (c *Client) SendMessage(chatID int, text string) error {
 
@@ -70,17 +69,17 @@ func (c *Client) SendMessage(chatID int, text string) error {
 	}
 
 	return nil
-	
+
 }
 
 func (c *Client) makeRequest(method string, query url.Values) (data []byte, err error) {
 
-	defer func () { err = e.Wrap("Couldn't make request", err) } ()
+	defer func() { err = e.Wrap("Couldn't make request", err) }()
 
-	u := url.URL {
+	u := url.URL{
 		Scheme: "https",
-		Host: c.host,
-		Path: path.Join(c.basePath + method),
+		Host:   c.host,
+		Path:   path.Join(c.basePath + method),
 	}
 
 	req, err := http.NewRequest(http.MethodGet, u.String(), nil)
@@ -96,7 +95,7 @@ func (c *Client) makeRequest(method string, query url.Values) (data []byte, err 
 		return nil, err
 	}
 
-	defer func() { _ = resp.Body.Close()}()
+	defer func() { _ = resp.Body.Close() }()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
