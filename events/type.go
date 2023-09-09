@@ -1,23 +1,22 @@
 package events
 
 type Fetcher interface {
-	Fetch (limit int) ([]Event, error)
+	Fetch(limit int) ([]Event, error)
 }
 
 type Processor interface {
-	Process (e Event) error
-
+	Process(e Event) error
 }
 
-type Type int 
+type Type int
 
 const (
 	Unknown Type = iota
 	Message
-
 )
 
 type Event struct {
 	Type Type
 	Text string
+	Meta interface{}
 }

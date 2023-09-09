@@ -2,6 +2,7 @@ package storage
 
 import (
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"golang-first-project/lib/e"
 	"io"
@@ -10,10 +11,12 @@ import (
 
 type Storage interface {
 	Save(page *Page) error
-	PickRandom(userName string) error
+	PickRandom(userName string) (Page, error)
 	Remove(page *Page) error
 	IsExists(page *Page) (bool, error)
 }
+
+var ErrorsNoSavedPages = errors.New("no saved pages")
 
 type Page struct {
 	URL       string
