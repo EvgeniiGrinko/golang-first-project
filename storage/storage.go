@@ -11,7 +11,7 @@ import (
 
 type Storage interface {
 	Save(page *Page) error
-	PickRandom(userName string) (Page, error)
+	PickRandom(userName string) (*Page, error)
 	Remove(page *Page) error
 	IsExists(page *Page) (bool, error)
 }

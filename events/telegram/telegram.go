@@ -80,7 +80,7 @@ func fetchType(upd telegram.Update) events.Type {
 	return events.Message
 }
 
-func (p *Processor) Processor(event events.Event) error {
+func (p *Processor) Process(event events.Event) error {
 	switch event.Type {
 	case events.Message:
 		return p.processMessage(event)
