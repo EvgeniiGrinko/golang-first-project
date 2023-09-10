@@ -79,7 +79,7 @@ func (c *Client) makeRequest(method string, query url.Values) (data []byte, err 
 	u := url.URL{
 		Scheme: "https",
 		Host:   c.host,
-		Path:   path.Join(c.basePath + method),
+		Path:   path.Join(c.basePath + "/" + method),
 	}
 
 	req, err := http.NewRequest(http.MethodGet, u.String(), nil)

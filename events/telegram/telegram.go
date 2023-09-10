@@ -92,20 +92,22 @@ func (p *Processor) Process(event events.Event) error {
 func (p *Processor) processMessage(event events.Event) error {
 	meta, err := meta(event)
 	if err != nil {
-		return e.Wrap("can't process message", err)
+		return e.Wrap("can't process message meta", err)
 	}
 
 	err = p.doCMD(event.Text, meta.ChatID, meta.UserName)
 	if err != nil {
-		return e.Wrap("can't process message", err)
+		return e.Wrap("can't do message", err)
 	}
 	return nil
 }
 
 func meta(event events.Event) (Meta, error) {
+
 	res, ok := event.Meta.(Meta)
 	if !ok {
 		return Meta{}, e.Wrap("can't get meta", ErrUnknownMetaType)
 	}
+
 	return res, nil
 }

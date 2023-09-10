@@ -84,12 +84,12 @@ func (p *Processor) SendRandom(chatID int, username string) (err error) {
 
 }
 
-func (p *Processor) sendHelp(clientID int) error {
-	return p.tg.SendMessage(clientID, msgHelp)
+func (p *Processor) sendHelp(chatID int) error {
+	return p.tg.SendMessage(chatID, msgHelp)
 }
 
-func (p *Processor) sendHello(clientID int) error {
-	return p.tg.SendMessage(clientID, msghello)
+func (p *Processor) sendHello(chatID int) error {
+	return p.tg.SendMessage(chatID, msghello)
 }
 
 func isURL(text string) bool {

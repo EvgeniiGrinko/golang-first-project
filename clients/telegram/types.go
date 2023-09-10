@@ -21,5 +21,5 @@ type From struct {
 }
 
 type Chat struct {
-	ID int `json:"chat"`
+	ID int `json:"id"`
 }
